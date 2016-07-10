@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+	<div class="container">
+		<h1>Address DOM</h1>
+		<div id="target">
+			<div class="row">
+				<div class="col-sm-6">
+					<h2>{{name}}'s Address From</h2>
+					<div class="well">
+						<p><strong>Name:</strong> {{name | capitalize}}</p>
+						<p><strong>Country:</strong> {{country | capitalize}}</p>
+						<p><strong>State:</strong> {{state | capitalize}}</p>
+						<p><strong>City:</strong> {{city | capitalize}}</p>
+						<p><strong>Street:</strong> {{street | capitalize}}</p>
+						<p><strong>Apt Number:</strong> {{aptnumber}}</p>
+						<p><strong>Zip Code:</strong> {{zipcode}}</p>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<h2>Modify Address</h2>
+					<p>Name <input class="form-control" type="text" data-property-bind="name"></p>
+					<p>Country <input class="form-control" type="text" data-property-bind="country"></p>
+					<p>State <input class="form-control" type="text" data-property-bind="state"></p>
+					<p>City <input class="form-control" type="text" data-property-bind="city"></p>
+					<p>Street <input class="form-control" type="text" data-property-bind="street"></p>
+					<p>Apt Number <input class="form-control" type="number" data-property-bind="aptnumber"></p>
+					<p>Zip Code <input class="form-control" type="number" data-property-bind="zipcode"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="bind-dom.js"></script>
+<script>
+	//welcome to bindDOM
+
+	//define a model:
+	var model = {
+		name: "Wendy",
+		country: "United State",
+		state: "New York",
+		city: "Mahatten",
+		street: "Broadway",
+		aptnumber: 1032,
+		zipcode: 10012
+	};
+
+	$(document).ready(function(){
+		//bind the model!
+		bindDOM('#target', model);
+	});
+
+	//bindDOM binds model to the text nodes.
+	//You can also bind inputs for a sweet two-way data-binding
+	//For your text nodes, you can format the output with however many callbacks you want:
+
+	//you can add formatters specifically to the model, for encapsulation
+	model.capitalize = function(string){
+		string = string.split(' ');
+		var loops = string.length;
+		var i, s;
+		var result ="";
+		for(i = 0; i < loops; i++){
+
+			s = string[i];
+
+			result = result + s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+			result = result + " ";
+
+		};
+		return result;
+	};
+
+</script>
+
+</body>
+</html>
